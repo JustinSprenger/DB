@@ -51,7 +51,7 @@ public class Database {
 		}
 		return "";
 	}
-	public String getDatabasewn(){
+	public int getDatabasewn(){
 		try {
 			int i = 1;
 			conn = DriverManager.getConnection("jdbc:postgresql://"+address+":"+port+"/"+database+"?"+"user=" + user +"&"+"password=" + pass);
@@ -62,11 +62,12 @@ public class Database {
 				System.out.println("Zeile " + i +": "+ rs.getString("Straﬂe")+"  "+rs.getString("Hausnummer")+"  "+rs.getString("Ort")+"  "+rs.getString("Postleitzahl"));
 				i++;
 			}
-				conn.close();		
+				conn.close();
+				return i;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return 0;
 	}
 	public String[] getDatabasefromnum(int i){
 		String[] val = new String[4];
@@ -133,6 +134,7 @@ public class Database {
 						break;
 
 					default:
+						System.out.println("Bitte geben Sie einen der angegebenen buchstaben ein!");
 						break;
 				}
 			}while(s!='q');
